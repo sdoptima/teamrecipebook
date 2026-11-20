@@ -115,7 +115,7 @@ h3.sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(
 .toc li a:hover{background:rgba(196,154,62,.16)}
 .toc .n{font-family:'Playfair Display',serif;font-weight:800;color:var(--gold3);width:22px;font-size:12px}
 .toc .nm{font-weight:600;white-space:nowrap}
-.toc .rt{font-style:italic;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px}
+.toc .rt{font-style:italic;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:165px}
 .toc .dots{flex:1;border-bottom:1.5px dotted rgba(166,124,37,.6);transform:translateY(-3px);min-width:10px}
 .toc .pg{font-family:'Playfair Display',serif;font-style:italic;color:var(--navy2);font-size:12px}
 .toc .divider{height:1px;margin:7px 0;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
@@ -131,12 +131,49 @@ h3.sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(
 .mono img{width:100%;height:100%;object-fit:cover}
 .cname{font-family:'Playfair Display',serif;font-weight:800;font-size:19px;color:var(--navy);line-height:1.1}
 .crole{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink2);margin-top:2px}
-.about{font-style:italic;font-size:11.5px;line-height:1.45;color:var(--ink2);margin-top:8px;padding-left:10px;border-left:2px solid var(--gold)}
-.rtitle{font-family:'Playfair Display',serif;font-weight:700;font-style:italic;font-size:23px;line-height:1.1;color:var(--berry);text-align:center;margin-top:12px}
+.rbody{flex:1;min-height:0;overflow-y:auto;margin-top:10px;padding:0 6px 8px 0;scrollbar-width:thin;scrollbar-color:rgba(196,154,62,.55) transparent}
+.rbody::-webkit-scrollbar{width:4px}.rbody::-webkit-scrollbar-thumb{background:rgba(196,154,62,.55);border-radius:4px}
+.page.hasMore .rbody{-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 34px),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - 34px),transparent)}
+.moreHint{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--navy2);
+  background:var(--cream);border:1px solid rgba(196,154,62,.7);border-radius:12px;padding:2px 10px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:2}
+.page.hasMore .moreHint{opacity:1}
+.story{padding-left:10px;border-left:2px solid var(--gold)}
+.story p{font-size:11.5px;line-height:1.55;color:var(--ink2);margin-bottom:6px;font-style:italic}
+.joke{margin:2px 0 2px;font-family:'Caveat',cursive;font-size:17px;line-height:1.15;color:var(--pine)}
+.joke summary{cursor:pointer;list-style:none}.joke summary::-webkit-details-marker{display:none}
+.joke summary b{color:var(--berry)}
+.joke .tap{font-family:'Lora',serif;font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:var(--gold3);white-space:nowrap;margin-left:4px}
+.joke[open] .tap{display:none}
+.joke .punch{color:var(--berry);font-weight:700;font-size:19px;padding:2px 0 0 14px;animation:pop .4s ease}
+@keyframes pop{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.openCard{margin-left:auto;align-self:center;font-family:'Lora',serif;font-size:10.5px;letter-spacing:.5px;color:var(--navy2);background:rgba(255,255,255,.6);
+  border:1px solid var(--gold);border-radius:14px;padding:4px 10px;cursor:pointer;white-space:nowrap;transition:all .2s}
+.openCard:hover{background:var(--navy2);color:var(--gold2)}
+/* recipe card modal */
+.modal{position:fixed;inset:0;z-index:50;background:rgba(5,12,28,.72);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:16px}
+.modal[hidden]{display:none}
+.mcard{position:relative;width:min(760px,100%);max-height:92vh;overflow-y:auto;border-radius:10px;padding:34px 36px 26px;color:var(--ink);
+  background:radial-gradient(ellipse at 50% 0%,#fffaf0,#f5ecd7);box-shadow:0 0 0 2px var(--gold),0 0 0 6px var(--navy),0 0 0 7px rgba(230,197,116,.6),0 30px 70px rgba(0,0,0,.6)}
+.mclose{position:absolute;top:10px;right:12px;width:34px;height:34px;border-radius:50%;border:1px solid var(--gold);background:var(--cream);color:var(--navy);font-size:20px;cursor:pointer}
+.mcard .mhead{text-align:center}
+.mcard .mchef{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold3);font-weight:600}
+.mcard h2{font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:32px;color:var(--berry);margin:4px 0 2px}
+.mcard .meta{margin:8px 0 16px}
+.mcard .story p{font-size:14px}
+.mcard .joke{font-size:21px;margin-bottom:6px}.mcard .joke .punch{font-size:23px}
+.mgrid{display:grid;grid-template-columns:2fr 3fr;gap:24px;margin-top:16px}
+.mgrid .ing li{font-size:14px;padding:4px 0 4px 17px}.mgrid .dir li{font-size:14px;margin-bottom:9px;padding-left:28px}
+.mgrid .dir li::before{width:20px;height:20px;font-size:11px}
+.mcard .tip{font-size:21px;margin-top:14px}
+.mactions{display:flex;justify-content:center;gap:10px;margin-top:16px}
+.mactions button{font-family:'Lora',serif;font-size:13px;color:var(--gold2);background:var(--navy2);border:1px solid var(--gold);border-radius:20px;padding:8px 18px;cursor:pointer}
+.mactions button:hover{background:var(--gold);color:var(--navy)}
+@media (max-width:640px){.mgrid{grid-template-columns:1fr}.mcard{padding:30px 20px 20px}.mcard h2{font-size:26px}}
+.rtitle{font-family:'Playfair Display',serif;font-weight:700;font-style:italic;font-size:23px;line-height:1.1;color:var(--berry);text-align:center;margin-top:10px}
 .flour{display:flex;justify-content:center;margin:3px 0 6px}
 .meta{display:flex;justify-content:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
 .meta span{font-size:10.5px;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:20px;border:1px solid rgba(196,154,62,.7);color:var(--navy2);background:rgba(255,255,255,.55)}
-.cols{display:flex;gap:16px;flex:1;min-height:0;overflow:auto;padding-right:2px}
+.cols{display:flex;gap:16px}
 .cols::-webkit-scrollbar{width:4px}.cols::-webkit-scrollbar-thumb{background:rgba(196,154,62,.5);border-radius:4px}
 .ing{flex:0 0 40%}.dir{flex:1}
 .ing ul{list-style:none}
@@ -208,6 +245,8 @@ nav.ctrl .ind{min-width:130px;text-align:center;color:#e8dcc0;font-size:13px;let
   <button id="bNext" aria-label="Next page">Next &#8594;</button>
   <button id="bToc" title="Table of contents">&#9776; Contents</button>
 </nav>
+<div class="modal" id="modal" hidden><div class="mcard" role="dialog" aria-modal="true"><button class="mclose" id="mclose" aria-label="Close">&times;</button>
+  <div id="mcontent"></div><div class="mactions"><button id="mcopy">Copy recipe</button><button id="mdone">Back to the book</button></div></div></div>
 <div class="hint">Tap a page, swipe, or use the &#8592; &#8594; keys to turn pages</div>
 
 <script>
@@ -217,7 +256,34 @@ nav.ctrl .ind{min-width:130px;text-align:center;color:#e8dcc0;font-size:13px;let
    photo: optional data: URI for a headshot (otherwise initials are shown).
    ===================================================================== */
 const CHEFS = [
-  {name:"Team Member 1",  role:"Role / Title", category:"Appetizer"},
+  {name:"Jessica Bergel", role:"ELA VR / Curriculum Developer", category:"Dessert", placeholder:false,
+   story:[
+     "Every morning in sunny Florida, Jessica brews a cup of coffee strong enough to make her Italian nonna proud, slips on her VR headset, and steps right into the pages of a book. One day she's leading students across a misty moor; the next she's building a library where the novels politely argue over who gets checked out first.",
+     "By evening the real adventure begins. Her three boys crowd the kitchen, the dogs 'help' by sweeping up every fallen crumb, and the cats supervise from the top of the fridge like tiny food critics. Her husband insists the house smells better than any bakery in Rome, and when the pumpkin swirl cheesecake comes out of the oven, everyone begs for a sequel."
+   ],
+   joke:{q:"Why did the cheesecake join Jessica's book club?", a:"It wanted to become a little more cultured!"},
+   title:"Pumpkin Swirl Cheesecake", serves:"12", prep:"30 min", cook:"1 hr 15 min", cookLabel:"Bake", extra:"Cool 3¾ hr",
+   ingredients:[
+     "Cooking spray",
+     "25 gingersnap cookies",
+     "1¾ cups sugar, divided",
+     "4 tbsp unsalted butter, melted and cooled",
+     "Three 8-oz packages cream cheese, cut into chunks and softened",
+     "5 large eggs, at room temperature",
+     "One 15-oz can pure pumpkin puree",
+     "1 tbsp pure vanilla extract",
+     "1 tbsp pumpkin-pie spice",
+     "½ tsp salt",
+     "Boiling water"
+   ],
+   steps:[
+     "Position a rack in the lower third of the oven and preheat to 325°F. Lightly coat a 9-inch springform pan with cooking spray. In a food processor, grind the cookies with ¼ cup sugar. Add the butter and pulse to combine. Press the mixture into the bottom and halfway up the sides of the pan. Bake until firm, 3 minutes. Transfer to a rack to cool.",
+     "Using an electric mixer, beat the cream cheese and remaining 1½ cups sugar until smooth, about 1 minute. Beat in 2 eggs until blended. Transfer ¼ cup of the cream cheese mixture to a small bowl and set aside. Add the remaining 3 eggs, the pumpkin, vanilla, pumpkin-pie spice and salt, and beat until combined, 2 minutes.",
+     "Set the springform pan with the cooled crust on a double layer of heavy-duty foil and wrap the foil tightly around the bottom and sides; set in a roasting pan. Pour the filling into the crust. Dollop the reserved cream cheese mixture onto the filling and, using the tip of a knife, swirl together. Transfer the roasting pan to the oven and add enough boiling water to reach about halfway up the sides of the springform pan. Bake until the center is slightly wobbly but the edges are firm to the touch, about 1 hour 15 minutes.",
+     "Transfer the roasting pan with the cheesecake to a rack and let cool for 45 minutes. Remove the springform pan from the water bath, discard the foil, and let the cheesecake cool on the rack for 3 hours.",
+     "Remove the springform pan sides. Run a knife under the bottom of the cake to release it, then slide it onto a serving platter."
+   ],
+   tipLabel:"Family note", tip:"A family favorite Jessica makes every year. Her son Alex loves it so much he asked for it for his birthday, so this year the family gets to enjoy it twice!"},
   {name:"Team Member 2",  role:"Role / Title", category:"Main Course"},
   {name:"Team Member 3",  role:"Role / Title", category:"Side Dish"},
   {name:"Team Member 4",  role:"Role / Title", category:"Holiday Cookies"},
@@ -232,7 +298,7 @@ const CHEFS = [
   {name:"Team Member 13", role:"Role / Title", category:"Appetizer"}
 ].map(c => Object.assign({
   placeholder:true, photo:null,
-  about:"", title:"Recipe Coming Soon", serves:"—", prep:"—", cook:"—",
+  story:[], joke:null, cookLabel:"Cook", extra:"", tipLabel:"Chef's tip", title:"Recipe Coming Soon", serves:"—", prep:"—", cook:"—",
   ingredients:[], steps:[], tip:""
 }, c));
 
@@ -289,7 +355,7 @@ function welcomePage(n){
     <h2 class="xmas foil">A Note from<br>the Kitchen</h2>
     <div class="lead">Thirteen kitchens. One very happy team.</div>
     <p class="first">Welcome to the very first Optima Labs Holiday Cookbook! Every December our tables fill up with the dishes we wait all year for: family heirlooms, happy accidents, and a few recipes we're still perfecting.</p>
-    <p>Inside you'll meet each member of our team, learn a little about them, and find the recipe that means "the holidays" in their home. Flip through, find a new favorite, and maybe bring a plate to the next team gathering.</p>
+    <p>Inside you'll meet each team member through a fictional story generated around what they do and some personal details, and find the recipe that means "the holidays" in their home. Flip through the book to find a new favorite, or some inspiration for your holiday meal!</p>
     <div class="sign">With warmth &amp; full plates,<br>The Optima Labs Team</div>
     <div class="howto"><b>How to use this book:</b> tap the right-hand page (or press &#8594;) to turn forward, tap the left page (or &#8592;) to go back, and use <b>Contents</b> to jump straight to any chef.</div>
     ${folio(n)}</div>`;
@@ -308,22 +374,29 @@ function recipePage(c, idx, n){
   const ic = ICON[CAT_ICON[c.category]||"snow"](13, CAT_ICON[c.category]==="cane"?"#9b2335":(CAT_ICON[c.category]==="tree"?"#2d5a4c":G));
   const ph = (k,w)=>Array.from({length:k},(_,i)=>`<span class="ph" style="width:${w[i%w.length]}%"></span>`).join("");
   const mono = c.photo ? `<img src="${c.photo}" alt="${esc(c.name)}">` : esc(initials(c.name));
-  const about = c.placeholder ? `<span class="ph" style="width:96%"></span><span class="ph" style="width:88%"></span><span class="ph" style="width:60%"></span>`
-                              : esc(c.about);
+  const first = c.name.split(" ")[0];
+  const story = c.placeholder ? `<span class="ph" style="width:96%"></span><span class="ph" style="width:88%"></span><span class="ph" style="width:60%"></span>`
+     : c.story.map(p=>`<p>${esc(p)}</p>`).join("") +
+       (c.joke?`<details class="joke"><summary><b>Dad joke:</b> ${esc(c.joke.q)} <span class="tap">tap for the punchline</span></summary><div class="punch">${esc(c.joke.a)}</div></details>`:"");
   const ing = c.placeholder ? `<ul>${Array.from({length:7},(_,i)=>`<li><span class="ph" style="width:${[80,65,90,55,75,70,60][i]}%;margin:4px 0"></span></li>`).join("")}</ul>`
                             : `<ul>${c.ingredients.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`;
   const dir = c.placeholder ? `<ol>${Array.from({length:4},()=>`<li>${ph(2,[95,70])}</li>`).join("")}</ol>`
                             : `<ol>${c.steps.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`;
-  const tip = c.placeholder ? `<b>Chef's tip:</b> a secret ingredient or family story will go here&hellip;` : (c.tip?`<b>Chef's tip:</b> ${esc(c.tip)}`:"");
+  const tip = c.placeholder ? `<b>Chef's tip:</b> a secret ingredient or family story will go here&hellip;` : (c.tip?`<b>${esc(c.tipLabel)}:</b> ${esc(c.tip)}`:"");
+  const meta = `<span>Serves ${esc(c.serves)}</span><span>Prep ${esc(c.prep)}</span><span>${esc(c.cookLabel)} ${esc(c.cook)}</span>${c.extra?`<span>${esc(c.extra)}</span>`:""}`;
   return `<div class="page paper recipe"><div class="frame"></div>${corners()}
     <div class="rhead"><span class="no">Chef No. ${idx+1}</span><span class="cat">${ic}${esc(c.category)}</span></div>
-    <div class="chef"><div class="mono">${mono}</div><div><div class="cname">${esc(c.name)}</div><div class="crole">${esc(c.role)}</div></div></div>
-    <div class="about">${about}</div>
-    ${c.placeholder?`<div class="stampWrap"><div class="stamp">Recipe Coming Soon!</div></div>`:`<h2 class="rtitle">${esc(c.title)}</h2>`}
-    <div class="flour">${flourish(150)}</div>
-    <div class="meta"><span>Serves ${esc(c.serves)}</span><span>Prep ${esc(c.prep)}</span><span>Cook ${esc(c.cook)}</span></div>
-    <div class="cols"><div class="ing"><h3 class="sec">Ingredients</h3>${ing}</div><div class="dir"><h3 class="sec">Directions</h3>${dir}</div></div>
-    ${tip?`<div class="tip">${tip}</div>`:""}
+    <div class="chef"><div class="mono">${mono}</div><div><div class="cname">${esc(c.name)}</div><div class="crole">${esc(c.role)}</div></div>
+      ${c.placeholder?"":`<button class="openCard" data-card="${idx}" title="Open a larger, easy-to-read recipe card">&#10530; Recipe card</button>`}</div>
+    <div class="rbody">
+      <div class="story"><h3 class="sec">${c.placeholder?"Chef's Story":esc(first)+"'s Story"}</h3>${story}</div>
+      ${c.placeholder?`<div class="stampWrap"><div class="stamp">Recipe Coming Soon!</div></div>`:`<h2 class="rtitle">${esc(c.title)}</h2>`}
+      <div class="flour">${flourish(150)}</div>
+      <div class="meta">${meta}</div>
+      <div class="cols"><div class="ing"><h3 class="sec">Ingredients</h3>${ing}</div><div class="dir"><h3 class="sec">Directions</h3>${dir}</div></div>
+      ${tip?`<div class="tip">${tip}</div>`:""}
+    </div>
+    <div class="moreHint">scroll for more &#8595;</div>
     ${folio(n)}</div>`;
 }
 function mathPage(n){
@@ -427,6 +500,8 @@ function render(){
       cur = page; spages[cur-1].classList.add("show");
     }
     book.querySelectorAll("[data-go]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();goTo(+a.dataset.go);}));
+    book.querySelectorAll("[data-card]").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();openCard(+b.dataset.card);}));
+    book.querySelectorAll(".rbody").forEach(b=>b.addEventListener("scroll",checkMore,{passive:true}));
   }
   const s = mode==="spread" ? Math.min((innerWidth-40)/(PW*2), (innerHeight-150)/PH, 1.3)
                             : Math.min((innerWidth-24)/PW, (innerHeight-150)/PH, 1.3);
@@ -434,7 +509,31 @@ function render(){
   scaler.parentElement.style.minHeight = (PH*s+10)+"px";
   update();
 }
-function skip(e){ return e.target.closest("a,button,[data-go]") || (getSelection()+"").length>0; }
+function skip(e){ return e.target.closest("a,button,[data-go],details,summary") || (getSelection()+"").length>0; }
+function checkMore(){ book.querySelectorAll(".recipe").forEach(pg=>{ const b=pg.querySelector(".rbody"); if(!b) return;
+  pg.classList.toggle("hasMore", b.scrollHeight>b.clientHeight+4 && b.scrollTop+b.clientHeight < b.scrollHeight-6); }); }
+const modal=document.getElementById("modal"); let cardIdx=null;
+function openCard(i){
+  const c=CHEFS[i]; cardIdx=i;
+  document.getElementById("mcontent").innerHTML = `<div class="mhead"><div class="mchef">Chef No. ${i+1} &middot; ${esc(c.name)} &middot; ${esc(c.role)}</div>
+    <h2>${esc(c.title)}</h2><div class="flour">${flourish(180)}</div>
+    <div class="meta"><span>Serves ${esc(c.serves)}</span><span>Prep ${esc(c.prep)}</span><span>${esc(c.cookLabel)} ${esc(c.cook)}</span>${c.extra?`<span>${esc(c.extra)}</span>`:""}</div></div>
+    <div class="story"><h3 class="sec">${esc(c.name.split(" ")[0])}'s Story</h3>${c.story.map(p=>`<p>${esc(p)}</p>`).join("")}
+    ${c.joke?`<details class="joke"><summary><b>Dad joke:</b> ${esc(c.joke.q)} <span class="tap">tap for the punchline</span></summary><div class="punch">${esc(c.joke.a)}</div></details>`:""}</div>
+    <div class="mgrid"><div class="ing"><h3 class="sec">Ingredients</h3><ul>${c.ingredients.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+    <div class="dir"><h3 class="sec">Directions</h3><ol>${c.steps.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div></div>
+    ${c.tip?`<div class="tip"><b>${esc(c.tipLabel)}:</b> ${esc(c.tip)}</div>`:""}`;
+  document.getElementById("mcopy").textContent="Copy recipe";
+  modal.hidden=false; modal.querySelector(".mcard").scrollTop=0; document.getElementById("mclose").focus();
+}
+function closeCard(){ modal.hidden=true; cardIdx=null; }
+document.getElementById("mclose").onclick=closeCard; document.getElementById("mdone").onclick=closeCard;
+modal.addEventListener("click",e=>{ if(e.target===modal) closeCard(); });
+document.getElementById("mcopy").onclick=async()=>{
+  const c=CHEFS[cardIdx]; const btn=document.getElementById("mcopy");
+  const txt=`${c.title}\nFrom ${c.name}, ${c.role}\nServes ${c.serves} | Prep ${c.prep} | ${c.cookLabel} ${c.cook}${c.extra?" | "+c.extra:""}\n\nINGREDIENTS\n${c.ingredients.map(x=>"- "+x).join("\n")}\n\nDIRECTIONS\n${c.steps.map((x,i)=>(i+1)+". "+x).join("\n")}${c.tip?"\n\n"+c.tipLabel+": "+c.tip:""}\n\nOptima Labs Holiday Cookbook`;
+  try{ await navigator.clipboard.writeText(txt); btn.textContent="Copied!"; }catch(e){ btn.textContent="Copy not available here"; }
+};
 function zOrder(){ leaves.forEach((L,i)=>{ if(!L.dataset.anim) L.style.zIndex = i<flipped ? i+1 : LEAVES-i+1; }); }
 
 function flipLeaf(i, forward, delay){
@@ -481,13 +580,14 @@ function update(){
   document.getElementById("bPrev").disabled=atStart; document.getElementById("bNext").disabled=atEnd;
   document.getElementById("bCover").disabled=atStart;
   try{ history.replaceState(null,"", hashPage>1 ? "#page-"+hashPage : location.pathname); }catch(e){}
+  setTimeout(checkMore,60);
 }
 
 document.getElementById("bNext").onclick=next;
 document.getElementById("bPrev").onclick=prev;
 document.getElementById("bCover").onclick=()=>goTo(1);
 document.getElementById("bToc").onclick=()=>goTo(3);
-addEventListener("keydown",e=>{ if(e.key==="ArrowRight"||e.key==="PageDown") next(); if(e.key==="ArrowLeft"||e.key==="PageUp") prev(); if(e.key==="Home") goTo(1); if(e.key==="End") goTo(TOTAL); });
+addEventListener("keydown",e=>{ if(!modal.hidden){ if(e.key==="Escape") closeCard(); return; } if(e.key==="ArrowRight"||e.key==="PageDown") next(); if(e.key==="ArrowLeft"||e.key==="PageUp") prev(); if(e.key==="Home") goTo(1); if(e.key==="End") goTo(TOTAL); });
 let tx=null,ty=null;
 document.getElementById("stageWrap").addEventListener("touchstart",e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
 document.getElementById("stageWrap").addEventListener("touchend",e=>{ if(tx===null) return; const dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
