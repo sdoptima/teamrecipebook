@@ -284,7 +284,14 @@ const CHEFS = [
      "Remove the springform pan sides. Run a knife under the bottom of the cake to release it, then slide it onto a serving platter."
    ],
    tipLabel:"Family note", tip:"A family favorite Jessica makes every year. Her son Alex loves it so much he asked for it for his birthday, so this year the family gets to enjoy it twice!"},
-  {name:"Team Member 2",  role:"Role / Title", category:"Main Course"},
+  {name:"Sarah Devereaux", role:"Math VR / Curriculum Designer", category:"Main Course", placeholder:false, recipePending:true,
+   story:[
+     "In a cozy corner of North Florida, Sarah builds virtual worlds where students can walk around inside a graph, stretch a parabola with their bare hands, and watch fractions come to life. Her two black kitties are convinced they're her co-designers, and they take turns strolling across the keyboard to 'debug' her latest level.",
+     "When she isn't solving for x, Sarah is painting, crafting, leveling up in her favorite video games, or being the fun auntie who always has a project and a puzzle ready to go. And at team meetings, everyone knows to stick around until the very end, because Sarah's boss always saves the last word for her: one more joke to wrap things up."
+   ],
+   jokeLabel:"Auntie joke",
+   joke:{q:"A crew of pi-rats was following their captain to buried treasure. \u201cHow much farther, Captain?\u201d they asked.", a:"\u201cArrr, just 3.14 yards!\u201d"},
+   title:"Yorkshire Pudding & Roast Beef"},
   {name:"Team Member 3",  role:"Role / Title", category:"Side Dish"},
   {name:"Team Member 4",  role:"Role / Title", category:"Holiday Cookies"},
   {name:"Team Member 5",  role:"Role / Title", category:"Festive Drink"},
@@ -298,7 +305,7 @@ const CHEFS = [
   {name:"Team Member 13", role:"Role / Title", category:"Appetizer"}
 ].map(c => Object.assign({
   placeholder:true, photo:null,
-  story:[], joke:null, cookLabel:"Cook", extra:"", tipLabel:"Chef's tip", title:"Recipe Coming Soon", serves:"—", prep:"—", cook:"—",
+  story:[], joke:null, jokeLabel:"Dad joke", recipePending:false, cookLabel:"Cook", extra:"", tipLabel:"Chef's tip", title:"Recipe Coming Soon", serves:"—", prep:"—", cook:"—",
   ingredients:[], steps:[], tip:""
 }, c));
 
@@ -377,20 +384,22 @@ function recipePage(c, idx, n){
   const first = c.name.split(" ")[0];
   const story = c.placeholder ? `<span class="ph" style="width:96%"></span><span class="ph" style="width:88%"></span><span class="ph" style="width:60%"></span>`
      : c.story.map(p=>`<p>${esc(p)}</p>`).join("") +
-       (c.joke?`<details class="joke"><summary><b>Dad joke:</b> ${esc(c.joke.q)} <span class="tap">tap for the punchline</span></summary><div class="punch">${esc(c.joke.a)}</div></details>`:"");
-  const ing = c.placeholder ? `<ul>${Array.from({length:7},(_,i)=>`<li><span class="ph" style="width:${[80,65,90,55,75,70,60][i]}%;margin:4px 0"></span></li>`).join("")}</ul>`
+       (c.joke?`<details class="joke"><summary><b>${esc(c.jokeLabel)}:</b> ${esc(c.joke.q)} <span class="tap">tap for the punchline</span></summary><div class="punch">${esc(c.joke.a)}</div></details>`:"");
+  const pend = c.placeholder || c.recipePending;
+  const ing = pend ? `<ul>${Array.from({length:7},(_,i)=>`<li><span class="ph" style="width:${[80,65,90,55,75,70,60][i]}%;margin:4px 0"></span></li>`).join("")}</ul>`
                             : `<ul>${c.ingredients.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`;
-  const dir = c.placeholder ? `<ol>${Array.from({length:4},()=>`<li>${ph(2,[95,70])}</li>`).join("")}</ol>`
+  const dir = pend ? `<ol>${Array.from({length:4},()=>`<li>${ph(2,[95,70])}</li>`).join("")}</ol>`
                             : `<ol>${c.steps.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`;
-  const tip = c.placeholder ? `<b>Chef's tip:</b> a secret ingredient or family story will go here&hellip;` : (c.tip?`<b>${esc(c.tipLabel)}:</b> ${esc(c.tip)}`:"");
+  const tip = c.recipePending ? "" : c.placeholder ? `<b>Chef's tip:</b> a secret ingredient or family story will go here&hellip;` : (c.tip?`<b>${esc(c.tipLabel)}:</b> ${esc(c.tip)}`:"");
   const meta = `<span>Serves ${esc(c.serves)}</span><span>Prep ${esc(c.prep)}</span><span>${esc(c.cookLabel)} ${esc(c.cook)}</span>${c.extra?`<span>${esc(c.extra)}</span>`:""}`;
   return `<div class="page paper recipe"><div class="frame"></div>${corners()}
     <div class="rhead"><span class="no">Chef No. ${idx+1}</span><span class="cat">${ic}${esc(c.category)}</span></div>
     <div class="chef"><div class="mono">${mono}</div><div><div class="cname">${esc(c.name)}</div><div class="crole">${esc(c.role)}</div></div>
-      ${c.placeholder?"":`<button class="openCard" data-card="${idx}" title="Open a larger, easy-to-read recipe card">&#10530; Recipe card</button>`}</div>
+      ${pend?"":`<button class="openCard" data-card="${idx}" title="Open a larger, easy-to-read recipe card">&#10530; Recipe card</button>`}</div>
     <div class="rbody">
       <div class="story"><h3 class="sec">${c.placeholder?"Chef's Story":esc(first)+"'s Story"}</h3>${story}</div>
       ${c.placeholder?`<div class="stampWrap"><div class="stamp">Recipe Coming Soon!</div></div>`:`<h2 class="rtitle">${esc(c.title)}</h2>`}
+      ${c.recipePending?`<div class="stampWrap" style="margin-top:6px"><div class="stamp" style="font-size:20px">Recipe Coming Soon!</div></div>`:""}
       <div class="flour">${flourish(150)}</div>
       <div class="meta">${meta}</div>
       <div class="cols"><div class="ing"><h3 class="sec">Ingredients</h3>${ing}</div><div class="dir"><h3 class="sec">Directions</h3>${dir}</div></div>
@@ -519,7 +528,7 @@ function openCard(i){
     <h2>${esc(c.title)}</h2><div class="flour">${flourish(180)}</div>
     <div class="meta"><span>Serves ${esc(c.serves)}</span><span>Prep ${esc(c.prep)}</span><span>${esc(c.cookLabel)} ${esc(c.cook)}</span>${c.extra?`<span>${esc(c.extra)}</span>`:""}</div></div>
     <div class="story"><h3 class="sec">${esc(c.name.split(" ")[0])}'s Story</h3>${c.story.map(p=>`<p>${esc(p)}</p>`).join("")}
-    ${c.joke?`<details class="joke"><summary><b>Dad joke:</b> ${esc(c.joke.q)} <span class="tap">tap for the punchline</span></summary><div class="punch">${esc(c.joke.a)}</div></details>`:""}</div>
+    ${c.joke?`<details class="joke"><summary><b>${esc(c.jokeLabel)}:</b> ${esc(c.joke.q)} <span class="tap">tap for the punchline</span></summary><div class="punch">${esc(c.joke.a)}</div></details>`:""}</div>
     <div class="mgrid"><div class="ing"><h3 class="sec">Ingredients</h3><ul>${c.ingredients.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
     <div class="dir"><h3 class="sec">Directions</h3><ol>${c.steps.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div></div>
     ${c.tip?`<div class="tip"><b>${esc(c.tipLabel)}:</b> ${esc(c.tip)}</div>`:""}`;
